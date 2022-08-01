@@ -75,13 +75,13 @@ class CharlesKeygen {
 					n += 8 - n % 8;
 				byte[] arrbChecksum = new byte[n];
 				System.arraycopy(bArrayName, 0, arrbChecksum, 4, nameLen);
-				bArrayName[0] = (byte)(nameLen >> 24);
-				bArrayName[1] = (byte)(nameLen >> 16);
-				bArrayName[2] = (byte)(nameLen >> 8);
-				bArrayName[3] = (byte)nameLen;
+				arrbChecksum[0] = (byte)(nameLen >> 24);
+				arrbChecksum[1] = (byte)(nameLen >> 16);
+				arrbChecksum[2] = (byte)(nameLen >> 8);
+				arrbChecksum[3] = (byte)nameLen;
 				RC5 r = new RC5();
 				r.RC5_SETUP(1763497072, 2049034577);
-				byte[] outputArray = r.RC5_EncryptArray(bArrayName);
+				byte[] outputArray = r.RC5_EncryptArray(arrbChecksum);
 				int n3 = 0;
 				for (byte by : outputArray) {
 					n3 ^= by;
